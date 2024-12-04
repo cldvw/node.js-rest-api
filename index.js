@@ -41,4 +41,18 @@ app.put('/users/:id', (req, res) => {
       res.status(404).json({ message: 'Utilisateur non trouvé' });
     }
   });
+
+// Route DELETE
+
+  app.delete('/users/:id', (req, res) => {
+    const id = parseInt(req.params.id, 10);
+    const userIndex = users.findIndex((user) => user.id === id);
+    if (userIndex !== -1) {
+      const deletedUser = users.splice(userIndex, 1);
+      res.json(deletedUser);
+    } else {
+      res.status(404).json({ message: 'Utilisateur non trouvé' });
+    }
+  });
+  
   
