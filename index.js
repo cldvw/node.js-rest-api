@@ -28,3 +28,17 @@ app.post('/users', (req, res) => {
 app.listen(port, () => {
   console.log(`Serveur démarré : http://localhost:${port}`);
 });
+
+// Route PUT 
+
+app.put('/users/:id', (req, res) => {
+    const id = parseInt(req.params.id, 10);
+    const userIndex = users.findIndex((user) => user.id === id);
+    if (userIndex !== -1) {
+      users[userIndex] = { id, ...req.body };
+      res.json(users[userIndex]);
+    } else {
+      res.status(404).json({ message: 'Utilisateur non trouvé' });
+    }
+  });
+  
